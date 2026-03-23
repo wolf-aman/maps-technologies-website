@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from 'react';
 import PageNavigation from '@/components/PageNavigation';
+import TechnicalPopup from '@/components/TechnicalPopup';
 
 export default function DesignServicePage() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const features = [
     {
       title: 'Schematic Design',
@@ -71,11 +77,20 @@ export default function DesignServicePage() {
         <div className="mt-12 bg-blue-600 rounded-lg p-8 text-white">
           <h3 className="text-2xl font-bold mb-4">Have Questions About Our Design Services?</h3>
           <p className="mb-6">Contact us to learn more about how we can help with your project.</p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-            Contact Us
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Submit Systems Brief for Review
           </button>
         </div>
       </div>
+
+      <TechnicalPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        capabilityKey="embedded"
+      />
     </div>
   );
 }

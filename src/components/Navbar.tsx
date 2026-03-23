@@ -43,6 +43,7 @@ export default function Navbar() {
                   alt="MAPS Logo"
                   width={96}
                   height={32}
+                  style={{ width: 'auto', height: 'auto' }}
                   className="object-contain"
                   priority
                 />

@@ -119,9 +119,9 @@ export default function ProductsPage() {
 
             {/* Product Cards Grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {productCategories.map((product) => (
+              {productCategories.map((product, index) => (
                 <Link
-                  key={product.slug}
+                  key={`${product.slug}-${product.title}-${index}`}
                   href={`/products/${product.slug}`}
                   className="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow group"
                 >

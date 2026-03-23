@@ -7,6 +7,7 @@
 import Hero from '@/components/Hero';
 import Timeline from '@/components/Timeline';
 import MissionVision from '@/components/MissionVision';
+import HomeEngagementSection from '@/components/HomeEngagementSection';
 import Footer from '@/components/Footer';
 
 export default function HomePage() {
@@ -64,27 +65,45 @@ export default function HomePage() {
       {/* Mission & Vision Section */}
       <MissionVision mission={mission} vision={vision} />
 
+      {/* Products, Services & Contact Section */}
+      <HomeEngagementSection
+        products={[
+          { label: 'Power Supply', href: '/products/power-supply' },
+          { label: 'Micro Controller', href: '/products/micro-controller' },
+          { label: 'Communication', href: '/products/communication' },
+          { label: 'See All Products', href: '/products' },
+        ]}
+        services={[
+          { label: 'Design', href: '/services/design' },
+          { label: 'PCB Layout', href: '/services/pcb-layout' },
+          { label: 'EMI/EMC', href: '/services/emi-emc' },
+          { label: 'See All Services', href: '/services' },
+        ]}
+        contactEmail="info@mapstech.co.in"
+      />
+
       {/* Footer */}
       <Footer
         companyName="MAPS Technologies"
         companyInfo={{
-          fullName: 'MAPS Technologies, Technology Ltd.',
-          address: 'Delhi: +71 33 23327, nep: maps@email.com',
-          phone: '+91 33 23327',
-          email: 'maps@email.com',
+          address: '57, Officers Campus Ext.\nSirsi Road, Jaipur – 302012, India',
+          phone: '+91 9145890775',
+          email: 'info@mapstech.co.in',
+          LastUpdated: 'March, 2026',
         }}
-        quickLinks={[
-          { label: 'Home', href: '/' },
-          { label: 'Products', href: '/products' },
-          { label: 'Services', href: '/services' },
-          { label: 'Contact Us', href: '#contact' },
+        capabilitiesLinks={[
+          { label: 'Embedded Systems', href: '/services/design' },
+          { label: 'Hardware & PCB Design', href: '/services/pcb-layout' },
+          { label: 'Firmware Development', href: '/services/training' },
+          { label: 'Sensing & Instrumentation', href: '/products/communication' },
+          { label: 'Technical Consulting', href: '/services' },
         ]}
-        socialLinks={[
-          { name: 'Facebook', href: '#', icon: 'facebook' },
-          { name: 'Twitter', href: '#', icon: 'twitter' },
-          { name: 'LinkedIn', href: '#', icon: 'linkedin' },
-          { name: 'Instagram', href: '#', icon: 'instagram' },
-          { name: 'YouTube', href: '#', icon: 'youtube' },
+        domainLinks={[
+          { label: 'Medical Electronics', href: '/products/other' },
+          { label: 'Industrial Systems', href: '/products/communication' },
+          { label: 'Custom Product Development', href: '/services/design' },
+          { label: 'Vibration / Geophone Systems', href: '/products/analog' },
+          { label: 'Metering and IoT Devices', href: '/products/micro-controller' },
         ]}
       />
     </div>

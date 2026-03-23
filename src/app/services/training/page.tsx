@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from 'react';
 import PageNavigation from '@/components/PageNavigation';
+import TechnicalPopup from '@/components/TechnicalPopup';
 
 export default function TrainingServicePage() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const courses = [
     {
       title: 'Embedded Systems Fundamentals',
@@ -154,11 +160,20 @@ export default function TrainingServicePage() {
         <div className="mt-12 bg-blue-600 rounded-lg p-8 text-white">
           <h3 className="text-2xl font-bold mb-4">Explore Our Training Programs</h3>
           <p className="mb-6">Discover how our expert-led training programs can enhance your team&apos;s skills.</p>
-          <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-            Get Information
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Submit Firmware Brief for Review
           </button>
         </div>
       </div>
+
+      <TechnicalPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        capabilityKey="firmware"
+      />
     </div>
   );
 }

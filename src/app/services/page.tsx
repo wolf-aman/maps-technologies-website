@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from 'react';
 import Link from 'next/link';
 import PageNavigation from '@/components/PageNavigation';
+import TechnicalPopup from '@/components/TechnicalPopup';
 
 export default function ServicesPage() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const services = [
     {
       title: 'Design',
@@ -95,7 +101,24 @@ export default function ServicesPage() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-10 bg-blue-600 rounded-lg p-8 text-white">
+          <h2 className="text-2xl font-bold mb-4">Need Consulting & Compliance Support?</h2>
+          <p className="mb-6">Share your challenge and our engineering team will review your brief within 24 hours.</p>
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Submit Consultation Brief for Review
+          </button>
+        </div>
       </div>
+
+      <TechnicalPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        capabilityKey="consulting"
+      />
     </div>
   );
 }

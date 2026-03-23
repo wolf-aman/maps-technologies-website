@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from 'react';
 import PageNavigation from '@/components/PageNavigation';
+import TechnicalPopup from '@/components/TechnicalPopup';
 
 export default function CommunicationPage() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const products = [
     {
       id: 1,
@@ -74,7 +80,24 @@ export default function CommunicationPage() {
             </div>
           ))}
         </div>
+
+        <div className="mt-10 bg-blue-600 rounded-lg p-8 text-white">
+          <h3 className="text-2xl font-bold mb-4">Need a Custom Sensing & Instrumentation Solution?</h3>
+          <p className="mb-6">Share your technical requirements for a focused engineering review.</p>
+          <button
+            onClick={() => setIsPopupOpen(true)}
+            className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            Submit Instrumentation Brief for Review
+          </button>
+        </div>
       </div>
+
+      <TechnicalPopup
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        capabilityKey="sensing"
+      />
     </div>
   );
 }

@@ -57,6 +57,7 @@ export default function Hero({
                 src={imageSrc}
                 alt="MAPS Technologies Team"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 priority
               />
