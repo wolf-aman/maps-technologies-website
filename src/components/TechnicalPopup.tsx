@@ -148,7 +148,7 @@ export default function TechnicalPopup({ isOpen, onClose, capabilityKey }: Techn
             <button
               type="button"
               onClick={onClose}
-              className="rounded-lg border border-slate-200 p-1.5 text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+              className="rounded-lg border border-slate-200 p-1.5 text-slate-500 hover:text-slate-700 hover:bg-red-500"
               aria-label="Close popup"
             >
               <X className="w-5 h-5" />

@@ -18,7 +18,7 @@ export default function ThankYouModal({ isOpen, onClose }: ThankYouModalProps) {
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 rounded-lg border border-slate-200 p-1.5 text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+          className="absolute right-4 top-4 rounded-lg border border-slate-200 p-1.5 text-slate-500 hover:text-slate-700 hover:bg-red-500"
           aria-label="Close popup"
         >
           <X className="h-5 w-5" />
