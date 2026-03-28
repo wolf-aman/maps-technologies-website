@@ -22,7 +22,6 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { navigationConfig } from '@/config/navigation.config';
 import NavLink from './NavLink';
-import Dropdown from './Dropdown';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -41,9 +40,8 @@ export default function Navbar() {
                 <Image
                   src="/images/logo.jpg"
                   alt="MAPS Logo"
-                  width={96}
-                  height={32}
-                  style={{ width: 'auto', height: 'auto' }}
+                  fill
+                  sizes="96px"
                   className="object-contain"
                   priority
                 />
@@ -57,19 +55,6 @@ export default function Navbar() {
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => {
-              // Render dropdown if item has children
-              if (item.dropdown && item.dropdown.length > 0) {
-                return (
-                  <Dropdown
-                    key={`${item.href}-${index}`}
-                    label={item.label}
-                    href={item.href}
-                    type={item.type}
-                    items={item.dropdown}
-                  />
-                );
-              }
-
               // Render regular link
               return (
                 <NavLink
@@ -120,21 +105,6 @@ export default function Navbar() {
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col space-y-4">
               {navItems.map((item, index) => {
-                // Render mobile dropdown if item has children
-                if (item.dropdown && item.dropdown.length > 0) {
-                  return (
-                    <Dropdown
-                      key={`mobile-${item.href}-${index}`}
-                      label={item.label}
-                      href={item.href}
-                      type={item.type}
-                      items={item.dropdown}
-                      isMobile={true}
-                      onItemClick={() => setMobileMenuOpen(false)}
-                    />
-                  );
-                }
-
                 // Render regular mobile link
                 return (
                   <NavLink

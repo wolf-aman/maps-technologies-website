@@ -6,8 +6,6 @@
 
 import Hero from '@/components/Hero';
 import Timeline from '@/components/Timeline';
-import MissionVision from '@/components/MissionVision';
-import HomeEngagementSection from '@/components/HomeEngagementSection';
 import Footer from '@/components/Footer';
 
 export default function HomePage() {
@@ -35,19 +33,6 @@ export default function HomePage() {
     },
   ];
 
-  // Mission & Vision data
-  const mission = {
-    title: 'Our Mission',
-    description:
-      'To be a Premier organization by developing and manufacturing new products in line with the customer needs and by providing the training on emerging technologies.',
-  };
-
-  const vision = {
-    title: 'Our Vision',
-    description:
-      'To become a Centre of Excellence in the field of Product Development, Supply Chain and Personal Training by adhering to Honesty, Integrity Innovations and Professional Values and by establishing a well-designed link between them.',
-  };
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -61,26 +46,6 @@ export default function HomePage() {
 
       {/* Timeline Section */}
       <Timeline title="About MAPS Technologies" milestones={milestones} />
-
-      {/* Mission & Vision Section */}
-      <MissionVision mission={mission} vision={vision} />
-
-      {/* Products, Services & Contact Section */}
-      <HomeEngagementSection
-        products={[
-          { label: 'Power Supply', href: '/products/power-supply' },
-          { label: 'Micro Controller', href: '/products/micro-controller' },
-          { label: 'Communication', href: '/products/communication' },
-          { label: 'See All Products', href: '/products' },
-        ]}
-        services={[
-          { label: 'Design', href: '/services/design' },
-          { label: 'PCB Layout', href: '/services/pcb-layout' },
-          { label: 'EMI/EMC', href: '/services/emi-emc' },
-          { label: 'See All Services', href: '/services' },
-        ]}
-        contactEmail="info@mapstech.co.in"
-      />
 
       {/* Footer */}
       <Footer

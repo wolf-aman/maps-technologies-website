@@ -13,7 +13,7 @@
 export type LinkType = 'internal' | 'external' | 'pdf' | 'hash';
 
 /**
- * Base navigation item interface
+ * Navigation item interface
  */
 export interface NavigationItem {
   /** Display label */
@@ -29,27 +29,11 @@ export interface NavigationItem {
 }
 
 /**
- * Navigation item that can have dropdown children
- */
-export interface NavigationItemWithDropdown extends NavigationItem {
-  /** Child items for dropdown */
-  dropdown?: NavigationItem[];
-}
-
-/**
  * Complete navigation configuration
  */
 export interface NavigationConfig {
   /** Main navigation items */
-  items: NavigationItemWithDropdown[];
+  items: NavigationItem[];
   /** Optional mobile-specific items */
   mobileOnly?: NavigationItem[];
-}
-
-/**
- * Dropdown state management
- */
-export interface DropdownState {
-  isOpen: boolean;
-  openDropdownId: string | null;
 }

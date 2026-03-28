@@ -2,8 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   
-  // Optimize for production deployment
-  swcMinify: true,
+  // Allow network IP for dev HMR
+  allowedDevOrigins: ['192.168.1.1'],
   
   // Image optimization
   images: {

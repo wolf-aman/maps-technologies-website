@@ -113,12 +113,17 @@ export default function TechnicalPopup({ isOpen, onClose, capabilityKey }: Techn
       });
 
       if (!response.ok) {
-        throw new Error('Request failed');
+        const responseBody = (await response.json().catch(() => null)) as
+          | { message?: string }
+          | null;
+        throw new Error(responseBody?.message || 'Request failed');
       }
 
       setIsSubmitted(true);
-    } catch {
-      setIsSubmitted(true);
+    } catch (error) {
+      setValidationError(
+        error instanceof Error ? error.message : 'Failed to submit. Please try again.'
+      );
     } finally {
       setIsSubmitting(false);
     }
