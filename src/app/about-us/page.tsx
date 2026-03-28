@@ -15,15 +15,15 @@ const timelinePeriods: TimelinePeriod[] = [
   },
   {
     year: '1995–2005: Industrial Expansion',
-    description: ['The AVR platform for Neonatal Care System', 'Automotive Infotainment System and Energy Metering'],
+    description: ['AVR platform for Neonatal Care System', 'Automotive Infotainment System and Energy Metering'],
   },
   {
     year: '2006–2020: Strategic Alliances',
-    description: ['With SmartSurgN, USA in surgical visualization technology', 'IEC 60601 and EMI/EMC compliance for medical products'],
+    description: ['With SmartSurgN, USA in Surgical Visualization Technology', 'IEC 60601 Compliance for Medical Products'],
   },
   {
     year: '2021–Present: Technology Hub',
-    description: ['Wireless Gophone network for landslide detection, illegal mining and heritage building safety', 'Advanced Surgical Visualization & Storage Systems for minimal Invesive surgeryies'],
+    description: ['Wireless Geophone Network for Landslide and Blast Detection', 'Visualization & Storage Systems for minimal Invasive Surgeries'],
   },
 ];
 
@@ -86,12 +86,12 @@ export default function AboutUsPage() {
               {/* Quote Box */}
               <div className="bg-transparent backdrop-blur-sm rounded-xl p-5 md:p-6 flex items-start shadow-sm border border-white/30">
 
-                {/* <span className="text-[#1a2347] text-5xl md:text-6xl font-serif leading-none mr-4 mt-1 opacity-90">
-                
-                </span> */}
+                <span className="text-[#1a2347] text-5xl md:text-6xl font-serif leading-none mr-4 mt-1 opacity-90">
+                "
+                </span>
 
                 <p className="text-[#475569] text-lg leading-relaxed font-medium">
-                  "At MAPS, our journey began with a simple belief: complex engineering
+                  At MAPS, our journey began with a simple belief: complex engineering
                   challenges require a first-time-right approach. We don't just build
                   products; we build strong engineering capabilities."
                 </p>
