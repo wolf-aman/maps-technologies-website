@@ -91,9 +91,9 @@ export default function AboutUsPage() {
                 </span> */}
 
                 <p className="text-[#475569] text-lg leading-relaxed font-medium">
-                  At MAPS, our journey began with a simple belief: complex engineering
+                  "At MAPS, our journey began with a simple belief: complex engineering
                   challenges require a first-time-right approach. We don't just build
-                  products; we build strong engineering capabilities.
+                  products; we build strong engineering capabilities."
                 </p>
 
               </div>
