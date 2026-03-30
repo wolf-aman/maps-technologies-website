@@ -1,70 +1,83 @@
-/**
- * Hero Component
- * 
- * Main hero section with heading, description, CTA button, and image
- * Used on the homepage to showcase the company
- * 
- * Props:
- * - title: Main heading text
- * - description: Supporting description text
- * - buttonText: CTA button text
- * - buttonLink: CTA button destination
- * - imageSrc: Path to hero image
- */
-
-import Link from 'next/link';
-import Image from 'next/image';
-
 interface HeroProps {
-  title: string;
-  description: string;
-  buttonText?: string;
-  buttonLink?: string;
-  imageSrc?: string;
+  companyName?: string;
+  headline?: string;
+  tagline?: string;
 }
 
 export default function Hero({
-  title,
-  description,
-  buttonText = 'Learn More',
-  buttonLink = '#about',
-  imageSrc = '/images/hero-lab.png',
+  headline = "Innovative Solutions for Diverse Industries",
+  tagline = "Advancing Technology for a Better Tomorrow",
 }: HeroProps) {
   return (
-    <section className="bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left Content */}
-          <div className="order-2 lg:order-1">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              {title}
-            </h1>
-            <p className="text-base sm:text-lg text-gray-700 mb-8 leading-relaxed">
-              {description}
-            </p>
-            <Link
-              href={buttonLink}
-              className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
-            >
-              {buttonText}
-            </Link>
-          </div>
+    <section className="bg-gray-50 pb-2">
 
-          {/* Right Image */}
-          <div className="order-1 lg:order-2">
-            <div className="relative w-full h-64 sm:h-80 lg:h-96 rounded-2xl overflow-hidden shadow-2xl">
-              <Image
-                src={imageSrc}
-                alt="MAPS Technologies Team"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
+      {/* container controlling left/right margin */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* hero image container */}
+        <div className="relative overflow-hidden shadow-lg">
+
+          <div
+            className="relative w-full"
+            style={{ aspectRatio: "1536 / 780" }}
+          >
+            {/* hero image */}
+            <img
+              src="/images/home-background.jpeg"
+              alt="MAPS Technologies Industries"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            {/* overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 via-transparent to-transparent"></div>
+
+            {/* company name */}
+            <div className="absolute top-[6%] left-[4%]">
+              <span className="text-white/90 text-sm md:text-base italic tracking-wide">
+                <span className="font-semibold">MAPS</span> Technologies
+              </span>
             </div>
+
+            {/* headline */}
+            <div className="absolute top-[15%] left-1/2 -translate-x-1/2 text-center w-[65%]">
+
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-3 leading-snug">
+                {headline}
+              </h1>
+
+              {/* divider */}
+              <div className="w-80 h-[1px] bg-white/70 mx-auto mb-3"></div>
+
+              {/* tagline */}
+              <p className="text-sm md:text-base italic text-white/90 text-right">
+                {tagline}
+              </p>
+
+            </div>
+
+            {/* bottom labels */}
+            <div className="absolute bottom-[8%] left-[4%] right-[4%]">
+
+              <div className="flex justify-between text-white text-xs md:text-sm font-medium">
+
+                <span>Medical Electronic Systems</span>
+
+                <span className="text-center">
+                  Vibration / Geophone Systems
+                </span>
+
+                <span className="text-right">
+                  Metering & Communication Systems
+                </span>
+
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div>
+
     </section>
   );
 }

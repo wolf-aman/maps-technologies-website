@@ -4,7 +4,8 @@ import Navbar from '@/components/Navbar';
 
 export const metadata: Metadata = {
   title: 'MAPS Technologies',
-  description: 'Comprehensive information about seismic sensors, geophones, and earth science monitoring equipment. Learn about technical specifications and applications.',
+  description:
+    'Comprehensive information about seismic sensors, geophones, and earth science monitoring equipment.',
 };
 
 export default function RootLayout({
@@ -14,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased bg-gray-50">
         <Navbar />
         {children}
       </body>
