@@ -1,3 +1,5 @@
+import "@/styles/fonts.css";
+
 interface HeroProps {
   companyName?: string;
   headline?: string;
@@ -5,7 +7,7 @@ interface HeroProps {
 }
 
 export default function Hero({
-  headline = "Innovative Solutions for Diverse Industries",
+  headline = "Innovative Solutions for Diverse Domains",
   tagline = "Advancing Technology for a Better Tomorrow",
 }: HeroProps) {
   return (
@@ -23,7 +25,7 @@ export default function Hero({
           >
             {/* hero image */}
             <img
-              src="/images/home-background.jpeg"
+              src="/images/home-background.png"
               alt="MAPS Technologies Industries"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -33,32 +35,48 @@ export default function Hero({
 
             {/* company name */}
             <div className="absolute top-[6%] left-[4%]">
-              <span className="text-white/90 text-sm md:text-base italic tracking-wide">
-                <span className="font-semibold">MAPS</span> Technologies
+              <span
+                className="text-white/90 tracking-[0.3px] italic"
+                style={{ fontFamily: "Segoe UI, sans-serif" }}
+              >
+                <span className="text-[24px] md:text-[26px] font-bold">MAPS</span>
+                <span className="text-[18px] md:text-[20px] font-semibold"> Technologies</span>
               </span>
             </div>
 
             {/* headline */}
             <div className="absolute top-[15%] left-1/2 -translate-x-1/2 text-center w-[65%]">
 
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white mb-3 leading-snug">
+              <h1
+                className="text-3xl sm:text-4xl md:text-[44px] lg:text-[36px] font-semibold italic text-white mb-4 leading-[1.2] tracking-[0.3px] whitespace-nowrap"
+                style={{ fontFamily: "Montserrat, sans-serif" }}
+              >
                 {headline}
               </h1>
 
               {/* divider */}
-              <div className="w-80 h-[1px] bg-white/70 mx-auto mb-3"></div>
+              <div className="w-[220px] h-[1px] bg-white/30 mx-auto mb-4"></div>
 
               {/* tagline */}
-              <p className="text-sm md:text-base italic text-white/90 text-right">
+              <p
+                className="text-[18px] md:text-[20px] italic font-medium text-white/85 text-right"
+                style={{ fontFamily: "Segoe UI, sans-serif" }}
+              >
                 {tagline}
               </p>
 
             </div>
 
             {/* bottom labels */}
-            <div className="absolute bottom-[8%] left-[4%] right-[4%]">
+            <div className="absolute bottom-[5%] left-[4%] right-[4%]">
 
-              <div className="flex justify-between text-white text-xs md:text-sm font-medium">
+              <div
+                className="flex justify-between text-white text-sm md:text-[18px] font-bold"
+                style={{ 
+                  fontFamily: "Poppins, sans-serif",
+                  textShadow: "0 2px 8px rgba(0, 0, 0, 0.6)"
+                }}
+              >
 
                 <span>Medical Electronic Systems</span>
 

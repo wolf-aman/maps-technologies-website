@@ -31,15 +31,15 @@ export default function AboutUsPage() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-white">
+    <div className="min-h-screen relative overflow-hidden">
       {/* Background Image */}
       <div
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/bg-about.jpeg')" }}
+        style={{ backgroundImage: "url('/images/bg-about.png')"}}
       />
 
       {/* Soft overlay for readability */}
-      <div className="fixed inset-0 z-0 bg-gradient-to-b from-white/70 via-white/50 to-white/80 pointer-events-none"></div>
+      <div className="fixed inset-0 z-0 bg-gradient-to-b from-white/35 via-white/20 to-white/40 pointer-events-none"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-8">
 
