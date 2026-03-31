@@ -41,8 +41,8 @@ export const navigationConfig: NavigationConfig = {
     },
     {
       label: 'Contact Us',
-      href: '#contact',
-      type: 'hash',
+      href: '/#contact',
+      type: 'internal',
       description: 'Get in touch with us',
     },
   ],

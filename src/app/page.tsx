@@ -54,10 +54,12 @@ export default function HomePage() {
           ]}
           domainLinks={[
             { label: 'Medical Electronics', href: '/domains/medical-electronics' },
-            { label: 'Industrial Systems', href: '/domains/industrial-systems' },
-            { label: 'Custom Product Development', href: '/domains/custom-product-development' },
             { label: 'Vibration / Geophone Systems', href: '/domains/vibration-geophone-systems' },
             { label: 'Metering and IoT Devices', href: '/domains/metering-iot-devices' },
+            { label: 'Industrial Systems', href: '/domains/industrial-systems' },
+            { label: 'Custom Product Development', href: '/domains/custom-product-development' },
+            
+            
           ]}
         />
       </div>

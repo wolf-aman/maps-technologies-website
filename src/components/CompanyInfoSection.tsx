@@ -51,7 +51,16 @@ export default function CompanyInfoSection({
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (window.location.hash === '#contact' || window.location.hash === '#explore-services') {
+      if (window.location.hash === '#contact') {
+        // Scroll to contact section smoothly
+        if (sectionRef.current) {
+          setTimeout(() => {
+            sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 0);
+        }
+        setIsHighlighted(true);
+        setTimeout(() => setIsHighlighted(false), 2000);
+      } else if (window.location.hash === '#explore-services') {
         setIsHighlighted(true);
         setTimeout(() => setIsHighlighted(false), 2000);
       }
@@ -175,9 +184,6 @@ export default function CompanyInfoSection({
                 <h3 className="text-xl font-bold text-gray-900">
                   Domain
                 </h3>
-                <p className="text-xs sm:text-sm text-blue-600 italic tracking-wide">
-                  Select a Service
-                </p>
                 
               </div>
 
