@@ -29,9 +29,9 @@ export const navigationConfig: NavigationConfig = {
     },
     {
       label: 'Services',
-      href: '/services',
-      type: 'internal',
-      description: 'Our professional services',
+      href: '/#explore-services',
+      type: 'hash',
+      description: 'Explore our professional services',
     },
     {
       label: 'Useful Links',

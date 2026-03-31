@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import TechnicalPopup from '@/components/TechnicalPopup';
 import { CapabilityType } from '@/lib/popupConfig';
 
@@ -37,14 +37,30 @@ export default function CompanyInfoSection({
     { label: 'Technical Consulting', href: '/services' },
   ],
   domainLinks = [
-    { label: 'Medical Electronics', href: '/products/other' },
-    { label: 'Industrial Systems', href: '/products/communication' },
-    { label: 'Custom Product Development', href: '/services/design' },
-    { label: 'Vibration / Geophone Systems', href: '/products/analog' },
+    { label: 'Medical Electronics', href: '/domains/medical-electronics' },
+    { label: 'Vibration / Geophone Systems', href: '/domains/vibration-geophone-systems' },
+    { label: 'Metering and IoT Devices', href: '/domains/metering-iot-devices' },
+    { label: 'Industrial Systems', href: '/domains/industrial-systems' },
+    { label: 'Custom Product Development', href: '/domains/custom-product-development' },
   ],
 }: CompanyInfoProps) {
 
   const [activeCapability, setActiveCapability] = useState<CapabilityType | null>(null);
+  const [isHighlighted, setIsHighlighted] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#contact' || window.location.hash === '#explore-services') {
+        setIsHighlighted(true);
+        setTimeout(() => setIsHighlighted(false), 2000);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange(); // Check on mount
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   const capabilityKeyByHref: Record<string, CapabilityType> = {
     '/services/design': 'embedded',
@@ -55,7 +71,13 @@ export default function CompanyInfoSection({
   };
 
   return (
-    <section className="bg-gray-100 pt-6 pb-0 md:pt-8 md:pb-0">
+    <section 
+      ref={sectionRef}
+      id="contact" 
+      className={`bg-gray-100 pt-6 pb-0 md:pt-8 md:pb-0 rounded-lg transition-all ${
+        isHighlighted ? 'highlight-target' : ''
+      }`}
+    >
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -118,12 +140,18 @@ export default function CompanyInfoSection({
               </div>
             </div>
 
-            {/* Capabilities */}
+            {/* Explore Services */}
             <div className="md:border-r md:border-gray-200 md:px-6">
 
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                Capabilities
-              </h3>
+              <div className="flex items-baseline gap-2 mb-4">
+                <h3 className="text-xl font-bold text-gray-900">
+                  Explore Services
+                </h3>
+                <p className="text-xs sm:text-sm text-blue-600 italic tracking-wide">
+                  Select a Service
+                </p>
+                
+              </div>
 
               <ul className="space-y-2">
                 {capabilitiesLinks.map((link, index) => (
@@ -132,7 +160,7 @@ export default function CompanyInfoSection({
                       onClick={() => setActiveCapability(capabilityKeyByHref[link.href] || null)}
                       className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm text-left"
                     >
-                      &raquo; {link.label}
+                      {">"} {link.label}
                     </button>
                   </li>
                 ))}
@@ -141,11 +169,17 @@ export default function CompanyInfoSection({
             </div>
 
             {/* Domains */}
-            <div className="md:pl-6">
+            <div className="md:border-r md:border-gray-200 md:px-6">
 
-              <h3 className="text-xl font-bold text-gray-900 mb-4">
-                Domains
-              </h3>
+              <div className="flex items-baseline gap-2 mb-4">
+                <h3 className="text-xl font-bold text-gray-900">
+                  Domain
+                </h3>
+                <p className="text-xs sm:text-sm text-blue-600 italic tracking-wide">
+                  Select a Service
+                </p>
+                
+              </div>
 
               <ul className="space-y-2">
                 {domainLinks.map((link, index) => (
@@ -154,7 +188,7 @@ export default function CompanyInfoSection({
                       href={link.href}
                       className="text-blue-600 hover:text-blue-800 text-xs sm:text-sm"
                     >
-                      &raquo; {link.label}
+                      {">"} {link.label}
                     </Link>
                   </li>
                 ))}

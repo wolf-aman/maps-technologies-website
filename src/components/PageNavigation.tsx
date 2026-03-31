@@ -6,11 +6,15 @@ export default function PageNavigation() {
   const router = useRouter();
 
   const handleBack = () => {
-    if (typeof window !== 'undefined' && window.history.length > 1) {
-      router.back();
-      return;
+    // Directly use browser history.back() which is more reliable
+    try {
+      if (typeof window !== 'undefined') {
+        window.history.back();
+      }
+    } catch (error) {
+      // If history.back() fails, navigate to home
+      router.push('/');
     }
-    router.push('/');
   };
 
   return (

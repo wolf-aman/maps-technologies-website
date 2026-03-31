@@ -41,8 +41,8 @@ export interface TocItem {
 export interface TocStructure {
   /** Title of the section (e.g., 'Products', 'Services') */
   title: string;
-  /** Description */
-  description: string;
+  /** Description - can be a single string or array of paragraph strings */
+  description: string | string[];
   /** Main TOC items */
   items: TocItem[];
 }

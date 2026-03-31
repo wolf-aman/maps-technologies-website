@@ -1,14 +1,9 @@
 import "@/styles/fonts.css";
 
 interface HeroProps {
-  companyName?: string;
-  headline?: string;
-  tagline?: string;
 }
 
 export default function Hero({
-  headline = "Innovative Solutions for Diverse Domains",
-  tagline = "Advancing Technology for a Better Tomorrow",
 }: HeroProps) {
   return (
     <section className="bg-gray-50 pb-2">
@@ -21,11 +16,11 @@ export default function Hero({
 
           <div
             className="relative w-full"
-            style={{ aspectRatio: "1536 / 780" }}
+            style={{ aspectRatio: "1536 / 1024" }}
           >
             {/* hero image */}
             <img
-              src="/images/home-background.png"
+              src="/images/Home_background_with_text.png"
               alt="MAPS Technologies Industries"
               className="absolute inset-0 w-full h-full object-cover"
             />
@@ -39,8 +34,8 @@ export default function Hero({
                 className="text-white/90 tracking-[0.3px] italic"
                 style={{ fontFamily: "Segoe UI, sans-serif" }}
               >
-                <span className="text-[24px] md:text-[26px] font-bold">MAPS</span>
-                <span className="text-[18px] md:text-[20px] font-semibold"> Technologies</span>
+                {/* <span className="text-[24px] md:text-[26px] font-bold">MAPS</span> */}
+                {/* <span className="text-[18px] md:text-[20px] font-semibold"> Technologies</span> */}
               </span>
             </div>
 
@@ -51,18 +46,18 @@ export default function Hero({
                 className="text-3xl sm:text-4xl md:text-[44px] lg:text-[36px] font-semibold italic text-white mb-4 leading-[1.2] tracking-[0.3px] whitespace-nowrap"
                 style={{ fontFamily: "Montserrat, sans-serif" }}
               >
-                {headline}
+                {/* {headline} */}
               </h1>
 
               {/* divider */}
-              <div className="w-[220px] h-[1px] bg-white/30 mx-auto mb-4"></div>
+              {/* <div className="w-[220px] h-[1px] bg-white/30 mx-auto mb-4"></div> */}
 
               {/* tagline */}
               <p
                 className="text-[18px] md:text-[20px] italic font-medium text-white/85 text-right"
                 style={{ fontFamily: "Segoe UI, sans-serif" }}
               >
-                {tagline}
+                {/* {tagline} */}
               </p>
 
             </div>
@@ -78,15 +73,15 @@ export default function Hero({
                 }}
               >
 
-                <span>Medical Electronic Systems</span>
+                {/* <span>Medical Electronic Systems</span> */}
 
-                <span className="text-center">
+                {/* <span className="text-center">
                   Vibration / Geophone Systems
-                </span>
+                </span> */}
 
-                <span className="text-right">
+                {/* <span className="text-right">
                   Metering & Communication Systems
-                </span>
+                </span> */}
 
               </div>
 

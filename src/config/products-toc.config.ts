@@ -7,53 +7,12 @@
 import { TocStructure } from '@/types/toc.types';
 
 export const productsTocStructure: TocStructure = {
-  title: 'Our Products',
-  description: 'Explore our comprehensive range of electronic components and solutions designed for reliability and performance.',
+  title: 'Products',
+  description: [
+    'A modular Hardware platform built on a Arm® Cortex®-M4 microcontroller, unifying sensing, connectivity, and power into one scalable system.',
+    'Mechanically and Electrically compatible with Raspberry Pi and HATs for flexible integration and expansion.',
+  ],
   items: [
-    {
-      id: 'power-supply-category',
-      label: 'Power Supply',
-      slug: 'power-supply',
-      children: [
-        {
-          id: 'ps-ac-dc',
-          label: 'AC/DC Converters',
-          slug: 'ac-dc-converter',
-        },
-        {
-          id: 'ps-dc-dc',
-          label: 'DC/DC Converters',
-          slug: 'dc-dc-converter',
-        },
-        {
-          id: 'ps-linear',
-          label: 'Linear Regulators',
-          slug: 'linear-regulator',
-        },
-      ],
-    },
-    {
-      id: 'micro-controller-category',
-      label: 'Micro Controller',
-      slug: 'micro-controller',
-      children: [
-        {
-          id: 'mc-8bit',
-          label: '8-bit Microcontrollers',
-          slug: '8-bit',
-        },
-        {
-          id: 'mc-32bit',
-          label: '32-bit Microcontrollers',
-          slug: '32-bit',
-        },
-        {
-          id: 'mc-dsp',
-          label: 'DSP Controllers',
-          slug: 'dsp',
-        },
-      ],
-    },
     {
       id: 'analog-category',
       label: 'Analog',
@@ -64,15 +23,17 @@ export const productsTocStructure: TocStructure = {
           label: 'Op-Amp Circuits',
           slug: 'op-amp',
         },
+      ],
+    },
+    {
+      id: 'power-supply-category',
+      label: 'Power Supply',
+      slug: 'power-supply',
+      children: [
         {
-          id: 'analog-adc-dac',
-          label: 'ADC/DAC Converters',
-          slug: 'adc-dac',
-        },
-        {
-          id: 'analog-integrated',
-          label: 'Integrated Circuits',
-          slug: 'integrated-circuits',
+          id: 'ps-ac-dc',
+          label: 'AC/DC Converters',
+          slug: 'ac-dc-converter',
         },
       ],
     },
@@ -86,37 +47,29 @@ export const productsTocStructure: TocStructure = {
           label: 'Wireless Modules',
           slug: 'wireless',
         },
+      ],
+    },
+    {
+      id: 'micro-controller-category',
+      label: 'Microcontroller',
+      slug: 'micro-controller',
+      children: [
         {
-          id: 'comm-wired',
-          label: 'Wired Communication',
-          slug: 'wired',
-        },
-        {
-          id: 'comm-rf',
-          label: 'RF Components',
-          slug: 'rf',
+          id: 'mc-8bit',
+          label: '8-bit Microcontrollers',
+          slug: '8-bit',
         },
       ],
     },
     {
-      id: 'battery-category',
-      label: 'Battery & Power Management',
+      id: 'Others-category',
+      label: 'Others',
       slug: 'other',
       children: [
         {
           id: 'batt-lithium',
           label: 'Lithium Batteries',
           slug: 'lithium',
-        },
-        {
-          id: 'batt-charger',
-          label: 'Battery Chargers',
-          slug: 'chargers',
-        },
-        {
-          id: 'batt-protection',
-          label: 'Protection Circuits',
-          slug: 'protection',
         },
       ],
     },

@@ -46,7 +46,15 @@ export default function AboutUsPage() {
         {/* Back Button */}
         <div className="mb-3">
           <button
-            onClick={() => router.back()}
+            onClick={() => {
+              try {
+                if (typeof window !== 'undefined') {
+                  window.history.back();
+                }
+              } catch (error) {
+                router.push('/');
+              }
+            }}
             className="flex items-center text-slate-500 hover:text-[#1a2347] font-medium transition-colors"
           >
             <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -116,12 +124,10 @@ export default function AboutUsPage() {
 
                 {/* Text */}
                 <div className="p-2 bg-transparent backdrop-blur-sm">
-                  <h3 className="text-lg font-semibold text-[#1a2347]">
-                    Dr Mahabir Prasad
-                  </h3>
-
-                  <p className="text-slate-600 text-xs mt-0 font-medium">
-                    Founder & CTO
+                  <p className="text-sm md:text-base font-bold text-[#1a2347] flex items-center gap-1 whitespace-nowrap">
+                    <span>Dr Mahabir Prasad</span>
+                    <span className="text-slate-400">|</span>
+                    <span className="text-xs font-medium text-slate-600">Founder & CTO</span>
                   </p>
                 </div>
 
@@ -147,8 +153,16 @@ export default function AboutUsPage() {
                   className="flex-1 text-left md:border-r border-slate-300/60 last:border-0 px-3 lg:px-4"
                 >
 
-                  <div className="text-[#203a85] text-sm md:text-base font-semibold tracking-wide mb-4 whitespace-nowrap">
-                    {period.year}
+                  <div className="text-sm md:text-base font-semibold tracking-wide mb-4 whitespace-nowrap">
+                    {(() => {
+                      const parts = period.year.split(': ');
+                      return (
+                        <>
+                          <span className="text-black font-bold">{parts[0]}:</span>
+                          <span className="text-[#203a85] italic ml-1">{parts[1]}</span>
+                        </>
+                      );
+                    })()}
                   </div>
 
                   <ul className="text-slate-600 text-xs md:text-sm leading-relaxed list-disc ml-4 space-y-2">
