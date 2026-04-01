@@ -85,18 +85,18 @@ export default function AboutUsPage() {
             {/* Left Column */}
             <div className="w-full md:w-[60%] flex flex-col pt-2">
 
-              <p className="text-lg md:text-xl text-[#475569] leading-relaxed mb-6 text-justify">
+              <p className="text-lg md:text-xl text-[#475569] leading-relaxed mb-9 text-justify">
                 MAPS Technologies, born out of academic collaboration at IIT Madras in 1992 and originally known as Sanmarg Union, specializes in embedded systems, medical electronics, and multidisciplinary product development.
               </p>
 
               {/* Quote Box */}
-              <div className="bg-transparent backdrop-blur-sm rounded-xl p-2 md:p-2 flex items-start shadow-sm border border-white/30">
+              <div className="bg-transparent backdrop-blur-sm rounded-xl p-1 md:p-2 flex items-start shadow-sm border border-white/30">
 
                 <span className="text-[#1a2347] text-4xl md:text-4xl font-serif leading-none mr-0 mt-0 opacity-90 flex-shrink-0">
                 @
                 </span>
 
-                <p className="text-[#475569] text-lg leading-relaxed font-medium text-justify">
+                <p className="font-dancing font-semibold text-2xl text-[#1a2347] leading-relaxed text-justify italic">
                   MAPS, our journey began with a simple belief: complex engineering
                   challenges require a first-time-right approach. We don't just build
                   products; we build strong engineering capabilities.

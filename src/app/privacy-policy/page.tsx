@@ -4,10 +4,9 @@ export default function PrivacyPolicyPage() {
   return (
     <InfoContentPage title="Privacy Policy">
       <p>
-        MAPS Technologies values your privacy. We collect only the information needed to respond to your
-        requests and improve communication.
+        Under Development
       </p>
-      <p>
+      {/* <p>
         We do not sell personal data. Any details you share with us are used strictly for support,
         business communication, and service-related updates.
       </p>
@@ -17,7 +16,7 @@ export default function PrivacyPolicyPage() {
           info@mapstech.co.in
         </a>
         .
-      </p>
+      </p> */}
     </InfoContentPage>
   );
 }

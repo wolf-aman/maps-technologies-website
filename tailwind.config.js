@@ -36,6 +36,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        dancing: ['Dancing Script', 'cursive'],
       },
     },
   },

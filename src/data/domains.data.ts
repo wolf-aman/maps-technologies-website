@@ -23,14 +23,14 @@ export const domainsData: DomainContent[] = [
     id: 'vibration-geophone',
     label: 'Vibration / Geophone Systems',
     slug: 'vibration-geophone-systems',
-    description: 'Advanced vibration sensing and geophone systems for seismic monitoring, structural health assessment, and industrial applications.',
+    description: 'Our vibration monitoring solutions leverage high-sensitivity geophones and precision accelerometers to detect microseismic activity and structural shifts with high fidelity. Engineered for mission-critical environments, the system incorporates low-noise signal acquisition and edge processing to isolate subtle precursors of landslides, unauthorized blasting and mining, and structural degradation.From protecting heritage structures and monitoring slope stability in remote terrains to ensuring the integrity of buildings near metro corridors, our distributed sensor networks enable reliable, real-time monitoring. With robust wireless connectivity and low-power design, the systems are suited for continuous operation in challenging and inaccessible locations.',
     imageUrl: '/images/domains/vibration-geophone.png',
   },
   {
     id: 'metering-iot',
     label: 'Metering and IoT Devices',
     slug: 'metering-iot-devices',
-    description: 'Smart metering solutions and IoT devices for energy management, data acquisition, and remote monitoring.',
+    description: 'Our metering and IoT solutions deliver high-precision measurement and seamless connectivity across electricity, water, and gas systems. Built on robust embedded architectures, the devices integrate precision analog front ends, calibration-aware measurement, and secure edge processing to ensure data integrity and long-term stability in demanding field conditions. From smart energy meters to water and gas flow monitoring, the systems leverage low-power wireless protocols and scalable cloud integration to provide reliable, real-time insights. With support for secure communication and tamper-aware operation, they bridge physical sensing and digital intelligence—enabling utilities and enterprises to optimize resource management, reduce operational losses, and build resilient, connected infrastructure.',
     imageUrl: '/images/domains/metering-iot.png',
   },
   {
