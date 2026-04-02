@@ -56,10 +56,7 @@ export default function HomePage() {
             { label: 'Medical Electronics', href: '/domains/medical-electronics' },
             { label: 'Vibration / Geophone Systems', href: '/domains/vibration-geophone-systems' },
             { label: 'Metering and IoT Devices', href: '/domains/metering-iot-devices' },
-            { label: 'Industrial Systems', href: '/domains/industrial-systems' },
-            { label: 'Custom Product Development', href: '/domains/custom-product-development' },
-            
-            
+            { label: 'Product Development and Services', href: '/domains/product-development-and-services' },
           ]}
         />
       </div>

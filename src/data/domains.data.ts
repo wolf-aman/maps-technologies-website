@@ -34,19 +34,13 @@ export const domainsData: DomainContent[] = [
     imageUrl: '/images/domains/metering-iot.png',
   },
   {
-    id: 'industrial-systems',
-    label: 'Industrial Systems',
-    slug: 'industrial-systems',
-    description: 'Robust industrial control systems, automation solutions, and process monitoring for manufacturing environments.',
-    imageUrl: '/images/domains/industrial-systems.png',
+    id: 'product-development-and-services',
+    label: 'Product Development and Services',
+    slug: 'product-development-and-services',
+    description: 'Our product services cover the complete lifecycle of electronic systems—from concept to production-ready solutions. By integrating hardware, firmware, and mechanical design, we deliver systems optimized for manufacturability, regulatory compliance, and long-term reliability in mission-critical environments.\nWe also specialize in the reverse engineering of legacy designs, along with field failure analysis and root-cause investigation to resolve field issues.\nWe also work as a technical partner to strengthen in-house teams through design reviews, guidance, and hands-on mentoring. This includes early risk identification, scalable hardware and firmware design. With experience in high-speed digital design, medical video systems, metering solutions, and compliance frameworks such as IEC 60601, we bring expertise to complex product development challenges.',
+    imageUrl: '/images/domains/product-development-and-services.png',
   },
-  {
-    id: 'custom-development',
-    label: 'Custom Product Development',
-    slug: 'custom-product-development',
-    description: 'Tailored solutions and custom product development for specialized applications and unique technical challenges.',
-    imageUrl: '/images/domains/custom-development.png',
-  },
+ 
 ];
 
 /**
