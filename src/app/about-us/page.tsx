@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 interface TimelinePeriod {
@@ -10,25 +9,24 @@ description: string[];
 
 const timelinePeriods: TimelinePeriod[] = [
   {
-    year: '1992–1994: Bootstraping',
+    year: '1992–1997: Bootstraping',
     description: ['Conveyor Belt Weighing System', 'Roof Stability Tester for Underground Mines'],
   },
   {
-    year: '1995–2005: Industrial Expansion',
+    year: '1998–2017: Industrial Expansion',
     description: ['AVR platform for Neonatal Care System', 'Automotive Infotainment System and Energy Metering'],
   },
   {
-    year: '2006–2020: Strategic Alliances',
+    year: '2018–2022: Strategic Alliances',
     description: ['With SmartSurgN, USA in Surgical Visualization Technology', 'IEC 60601 Compliance for Medical Products'],
   },
   {
-    year: '2021–Present: Technology Hub',
+    year: '2023–Present: Technology Hub',
     description: ['Wireless Geophone Network for Landslide and Blast Detection', 'Visualization & Storage Systems for minimal Invasive Surgeries'],
   },
 ];
 
 export default function AboutUsPage() {
-  const router = useRouter();
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -42,27 +40,6 @@ export default function AboutUsPage() {
       <div className="fixed inset-0 z-0 bg-gradient-to-b from-white/35 via-white/20 to-white/40 pointer-events-none"></div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8 py-8">
-
-        {/* Back Button */}
-        <div className="mb-3">
-          <button
-            onClick={() => {
-              try {
-                if (typeof window !== 'undefined') {
-                  window.history.back();
-                }
-              } catch (error) {
-                router.push('/');
-              }
-            }}
-            className="flex items-center text-slate-500 hover:text-[#1a2347] font-medium transition-colors"
-          >
-            <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            Back
-          </button>
-        </div>
 
         {/* Top Header Line */}
         <div className="flex items-center w-full mb-5">

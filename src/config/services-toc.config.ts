@@ -120,33 +120,3 @@ export const servicesTocStructure: TocStructure = {
     },
   ],
 };
-
-/**
- * Helper function to flatten TOC structure for easier searching
- */
-export function flattenServicesToc() {
-  const flattened: Array<{ id: string; label: string; slug?: string; parentId?: string }> = [];
-
-  function traverse(item: typeof servicesTocStructure.items[0], parentId?: string) {
-    flattened.push({
-      id: item.id,
-      label: item.label,
-      slug: item.slug,
-      parentId,
-    });
-    if (item.children) {
-      item.children.forEach((child) => traverse(child, item.id));
-    }
-  }
-
-  servicesTocStructure.items.forEach((item) => traverse(item));
-  return flattened;
-}
-
-/**
- * Helper function to find a TOC item by slug
- */
-export function findServiceTocBySlug(slug: string) {
-  const flattened = flattenServicesToc();
-  return flattened.find((item) => item.slug === slug);
-}

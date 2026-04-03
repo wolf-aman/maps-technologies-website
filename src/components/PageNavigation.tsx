@@ -18,31 +18,25 @@ export default function PageNavigation() {
   };
 
   return (
-    <div className="bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
-            aria-label="Go back"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            <span className="font-medium">Back</span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <button
+      onClick={handleBack}
+      className="flex items-center text-gray-600 hover:text-blue-600 transition-colors font-medium text-sm ml-4 sm:ml-6 lg:ml-8 mt-2 mb-4 hover:gap-1 gap-1.5"
+      aria-label="Go back"
+    >
+      <svg
+        className="w-5 h-5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M15 19l-7-7 7-7"
+        />
+      </svg>
+      <span>Back</span>
+    </button>
   );
 }

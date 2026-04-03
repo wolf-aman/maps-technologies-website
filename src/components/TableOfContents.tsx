@@ -16,7 +16,6 @@
 
 import { useState, useEffect } from 'react';
 import { TocItem } from '@/types/toc.types';
-import Link from 'next/link';
 
 interface TableOfContentsProps {
   /** Array of TOC items */
@@ -101,11 +100,10 @@ export default function TableOfContents({
           {/* Item label/link */}
           <div className="flex-1 min-w-0">
             {hasChildren ? (
-              // If has children, it's clickable as a button to expand
+              // If has children, it's clickable as a button to expand/collapse ONLY
               <button
                 onClick={() => {
                   toggleExpand(item.id);
-                  onItemSelect?.(item);
                 }}
                 className={`w-full text-left py-2 px-3 rounded-md font-medium text-sm transition-colors ${
                   isActive
@@ -116,18 +114,17 @@ export default function TableOfContents({
                 {item.label}
               </button>
             ) : (
-              // If no children, it's a regular link
-              <Link
-                href={`#${item.slug}`}
+              // If no children, it's a clickable button that loads content
+              <button
                 onClick={() => onItemSelect?.(item)}
-                className={`block py-2 px-3 rounded-md font-medium text-sm transition-colors ${
+                className={`w-full text-left py-2 px-3 rounded-md font-medium text-sm transition-colors ${
                   isActive
                     ? 'bg-blue-50 text-blue-600 border-l-2 border-blue-600'
                     : 'text-gray-700 hover:bg-gray-50'
                 }`}
               >
                 {item.label}
-              </Link>
+              </button>
             )}
           </div>
         </div>
