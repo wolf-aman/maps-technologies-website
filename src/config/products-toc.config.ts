@@ -75,33 +75,3 @@ export const productsTocStructure: TocStructure = {
     },
   ],
 };
-
-/**
- * Helper function to flatten TOC structure for easier searching
- */
-export function flattenProductsToc() {
-  const flattened: Array<{ id: string; label: string; slug?: string; parentId?: string }> = [];
-
-  function traverse(item: typeof productsTocStructure.items[0], parentId?: string) {
-    flattened.push({
-      id: item.id,
-      label: item.label,
-      slug: item.slug,
-      parentId,
-    });
-    if (item.children) {
-      item.children.forEach((child) => traverse(child, item.id));
-    }
-  }
-
-  productsTocStructure.items.forEach((item) => traverse(item));
-  return flattened;
-}
-
-/**
- * Helper function to find a TOC item by slug
- */
-export function findProductTocBySlug(slug: string) {
-  const flattened = flattenProductsToc();
-  return flattened.find((item) => item.slug === slug);
-}
