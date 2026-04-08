@@ -19,21 +19,21 @@ export const productsTocStructure: TocStructure = {
       slug: 'analog',
       children: [
         {
-          id: 'analog-op-amp',
-          label: 'Op-Amp Circuits',
-          slug: 'op-amp',
+          id: 'analog-geophone',
+          label: 'Geophone Data Acquisition Board',
+          slug: 'geophone-data-acquisition-board',
         },
       ],
     },
     {
       id: 'power-supply-category',
-      label: 'Power Supply',
-      slug: 'power-supply',
+      label: 'Power',
+      slug: 'power',
       children: [
         {
-          id: 'ps-ac-dc',
-          label: 'AC/DC Converters',
-          slug: 'ac-dc-converter',
+          id: 'charger-cum-power',
+          label: 'Charger-cum-Power',
+          slug: 'charger-cum-power',
         },
       ],
     },
