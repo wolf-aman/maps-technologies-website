@@ -55,9 +55,9 @@ export const productsTocStructure: TocStructure = {
       slug: 'micro-controller',
       children: [
         {
-          id: 'mc-8bit',
-          label: '8-bit Microcontrollers',
-          slug: '8-bit',
+          id: 'daq-processing-engine-board',
+          label: 'DAQ Processing Engine Board',
+          slug: 'daq-processing-engine-board',
         },
       ],
     },
