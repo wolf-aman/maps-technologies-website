@@ -43,9 +43,14 @@ export const productsTocStructure: TocStructure = {
       slug: 'communication',
       children: [
         {
-          id: 'comm-wireless',
-          label: 'Wireless Modules',
-          slug: 'wireless',
+          id: 'GSM GPRS Communication Board',
+          label: 'GSM GPRS Communication Board',
+          slug: 'GSM GPRS Communication Board',
+        },
+        {
+          id: 'WIFI LORA ISM Communication Board',
+          label: 'WIFI LORA ISM Communication Board',
+          slug: 'WIFI LORA ISM Communication Board',
         },
       ],
     },
