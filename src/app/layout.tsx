@@ -37,6 +37,24 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <head>
+        {/* Preload critical background images for faster rendering */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/Home_background_with_text.png"
+          type="image/png"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/bg-products.png"
+          type="image/png"
+        />
+        
+        {/* Prefetch other background images for faster subsequent loads */}
+        <link rel="prefetch" href="/images/bg-about.png" as="image" />
+        <link rel="prefetch" href="/images/domains/bg-domain.png" as="image" />
+        
         <link
           href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
           rel="preload"
