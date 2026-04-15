@@ -1,3 +1,14 @@
+/**
+ * Page Navigation Component
+ * 
+ * Provides back navigation functionality across pages.
+ * Uses Next.js router to handle page transitions.
+ * 
+ * @component
+ * @example
+ * return <PageNavigation />;
+ */
+
 'use client';
 
 import { useRouter } from 'next/navigation';

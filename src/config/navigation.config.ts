@@ -28,6 +28,12 @@ export const navigationConfig: NavigationConfig = {
       description: 'Browse our products',
     },
     {
+      label: 'Applications',
+      href: '/application',
+      type: 'internal',
+      description: 'Explore use cases and applications',
+    },
+    {
       label: 'Services',
       href: '/#explore-services',
       type: 'hash',

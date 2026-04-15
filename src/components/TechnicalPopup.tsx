@@ -1,3 +1,29 @@
+/**
+ * Technical Inquiry Popup Component
+ * 
+ * A multi-step form modal for submitting technical inquiries to MAPS Technologies.
+ * - Step 1: Problem description and capability selection
+ * - Step 2: Contact details submission
+ * - Success: Thank you modal
+ * 
+ * Features:
+ * - Form validation with user-friendly error messages
+ * - Multi-step form flow
+ * - Email submission via /api/submit-brief endpoint
+ * - Error handling with recovery options
+ * 
+ * @component
+ * @example
+ * const [isOpen, setIsOpen] = useState(false);
+ * return (
+ *   <TechnicalPopup 
+ *     isOpen={isOpen} 
+ *     onClose={() => setIsOpen(false)} 
+ *     capabilityKey="embedded" 
+ *   />
+ * );
+ */
+
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
@@ -5,12 +31,21 @@ import { Lock, Mail, Phone, Send, User, X } from 'lucide-react';
 import ThankYouModal from '@/components/ThankYouModal';
 import { CapabilityType, popupConfig } from '@/lib/popupConfig';
 
+/**
+ * Props for TechnicalPopup component
+ */
 interface TechnicalPopupProps {
+  /** Whether the popup is visible */
   isOpen: boolean;
+  /** Callback when popup should close */
   onClose: () => void;
+  /** Type of capability being inquired about */
   capabilityKey: CapabilityType;
 }
 
+/**
+ * Form data structure for technical inquiry
+ */
 interface FormData {
   areaOfProblem: string;
   specifyNeed: string;

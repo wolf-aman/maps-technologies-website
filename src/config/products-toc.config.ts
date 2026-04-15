@@ -19,10 +19,10 @@ export const productsTocStructure: TocStructure = {
       slug: 'analog',
       children: [
         {
-          id: 'analog-geophone',
+          id: 'Geophone Data Acquisition Board',
           label: 'Geophone Data Acquisition Board',
-          slug: 'geophone-data-acquisition-board',
-        },
+          slug: 'Geophone Data Acquisition Board',
+        }
       ],
     },
     {
@@ -60,21 +60,21 @@ export const productsTocStructure: TocStructure = {
       slug: 'micro-controller',
       children: [
         {
-          id: 'daq-processing-engine-board',
+          id: 'DAQ Processing Engine Board',
           label: 'DAQ Processing Engine Board',
-          slug: 'daq-processing-engine-board',
+          slug: 'DAQ Processing Engine Board',
         },
       ],
     },
     {
-      id: 'Others-category',
-      label: 'Others',
+      id: 'other-category',
+      label: 'Other',
       slug: 'other',
       children: [
         {
-          id: 'batt-lithium',
-          label: 'Lithium Batteries',
-          slug: 'lithium',
+          id: 'add',
+          label: 'add',
+          slug: 'add',
         },
       ],
     },

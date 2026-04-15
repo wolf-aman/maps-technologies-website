@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import TableOfContents from '@/components/TableOfContents';
 import PDFViewer from '@/components/PDFViewer';
-import { careersTocStructure } from '@/config/careers-toc.config';
+import { applicationsTocStructure } from '@/config/applications-toc.config';
 import type { TocItem } from '@/types/toc.types';
 
-export default function CareerPage() {
+export default function ApplicationPage() {
   const [selectedItem, setSelectedItem] = useState<TocItem | null>(null);
 
   return (
@@ -24,11 +24,11 @@ export default function CareerPage() {
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">
-            {careersTocStructure.title}
+            {applicationsTocStructure.title}
           </h1>
-          {Array.isArray(careersTocStructure.description) ? (
+          {Array.isArray(applicationsTocStructure.description) ? (
             <div className="space-y-3">
-              {careersTocStructure.description.map((paragraph, index) => (
+              {applicationsTocStructure.description.map((paragraph: string, index: number) => (
                 <p key={index} className="text-lg text-gray-600">
                   {paragraph}
                 </p>
@@ -36,7 +36,7 @@ export default function CareerPage() {
             </div>
           ) : (
             <p className="text-lg text-gray-600">
-              {careersTocStructure.description}
+              {applicationsTocStructure.description}
             </p>
           )}
         </div>
@@ -45,9 +45,9 @@ export default function CareerPage() {
           {/* Left Sidebar - Table of Contents */}
           <aside className="lg:w-72 flex-shrink-0">
             <div className="bg-transparent rounded-lg border border-gray-400/50 p-6 sticky top-24 h-full overflow-y-auto">
-              <h2 className="text-lg font-bold text-gray-900 mb-4">Opportunities</h2>
+              <h2 className="text-lg font-bold text-gray-900 mb-4">Applications</h2>
               <TableOfContents
-                items={careersTocStructure.items}
+                items={applicationsTocStructure.items}
                 currentSlug={selectedItem?.slug}
                 onItemSelect={setSelectedItem}
               />
@@ -58,7 +58,7 @@ export default function CareerPage() {
           <main className="flex-1">
             {selectedItem?.slug ? (
               // Display PDF viewer for selected item
-              <PDFViewer slug={selectedItem.slug} label={selectedItem.label} category="careers" />
+              <PDFViewer slug={selectedItem.slug} label={selectedItem.label} category="applications" />
             ) : (
               // Display showcase image by default
               <div

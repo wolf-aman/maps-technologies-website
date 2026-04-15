@@ -13,15 +13,41 @@ export default function HomePage() {
   const [highlightExploreServices, setHighlightExploreServices] = useState(false);
 
   useEffect(() => {
+    // Handle hash-based scroll on page load or hash change
     const handleHashChange = () => {
-      if (window.location.hash === '#explore-services') {
+      const hash = window.location.hash;
+      
+      if (hash === '#explore-services') {
+        // Highlight the section
         setHighlightExploreServices(true);
         setTimeout(() => setHighlightExploreServices(false), 2000);
+        
+        // Try multiple times to scroll to element (in case DOM isn't ready)
+        let attempts = 0;
+        const tryScroll = () => {
+          attempts++;
+          const element = document.getElementById('explore-services');
+          
+          if (element) {
+            // Scroll to the element
+            setTimeout(() => {
+              element.scrollIntoView({ behavior: 'smooth' });
+            }, 50);
+          } else if (attempts < 5) {
+            // Element not ready yet, retry
+            setTimeout(tryScroll, 100);
+          }
+        };
+        
+        tryScroll();
       }
     };
 
+    // Check on initial mount
+    handleHashChange();
+    
+    // Listen for hash changes (navigation via Services link)
     window.addEventListener('hashchange', handleHashChange);
-    handleHashChange(); // Check on mount
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 

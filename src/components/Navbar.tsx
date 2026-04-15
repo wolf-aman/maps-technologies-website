@@ -18,7 +18,6 @@
 
 'use client';
 
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
@@ -58,46 +57,77 @@ export default function Navbar() {
     setSearchQuery('');
     setSearchResults([]);
     setShowSearchDropdown(false);
-    router.push(href);
     
-    // Scroll to top if navigating to home
-    if (href === '/') {
-      setTimeout(() => {
+    // Handle hash links to home (/#explore-services)
+    if (href.startsWith('/#')) {
+      const hashId = href.substring(2);
+      if (pathname === '/') {
+        // Already on home, scroll to section
+        const element = document.getElementById(hashId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to home first
+        router.push('/');
+        
+        // Try multiple times to find and scroll to element
+        let attempts = 0;
+        const scrollToElement = () => {
+          attempts++;
+          const element = document.getElementById(hashId);
+          
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          } else if (attempts < 8) {
+            setTimeout(scrollToElement, 150);
+          }
+        };
+        
+        setTimeout(scrollToElement, 300);
+      }
+    } else if (href === '/') {
+      // Navigate to home - clear hash and scroll to top
+      if (pathname === '/') {
+        // Already on home
+        if (window.location.hash) {
+          window.history.replaceState(null, '', '/');
+        }
         window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 0);
+      } else {
+        // Navigate from another page
+        router.push(href);
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      // Regular navigation
+      router.push(href);
     }
   };
 
-  // Handle back button - clear history when reaching home page
+  // Handle back button - let browser handle naturally
   const handleBack = () => {
     if (typeof window === 'undefined') return;
-
-    // If already on home page, clear the history
-    if (pathname === '/') {
-      window.history.replaceState(null, '', '/');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    // Otherwise go back normally
     window.history.back();
-    
-    // Scroll to top after navigation
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
   };
 
-  // Handle home navigation - always start from top
-  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    if (pathname !== '/') {
-      router.push('/');
-    }
-    // Scroll to top immediately
-    setTimeout(() => {
+  // Handle home click - use button not Link
+  const handleHomeClick = () => {
+    if (pathname === '/') {
+      // Already on home, clear hash if present and scroll to top
+      if (window.location.hash) {
+        window.history.replaceState(null, '', '/');
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 0);
+    } else {
+      // Navigate to home then scroll
+      router.push('/');
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 100);
+    }
   };
 
   // Close dropdown when clicking outside
@@ -135,7 +165,11 @@ export default function Navbar() {
             </button>
 
             {/* Logo and Brand */}
-            <Link href="/" onClick={handleHomeClick} className="flex items-center space-x-2">
+            <button 
+              onClick={handleHomeClick}
+              className="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+              aria-label="MAPS Technologies Home"
+            >
               <div className="relative w-24 h-8">
                 <Image
                   src="/images/logo.jpg"
@@ -149,7 +183,7 @@ export default function Navbar() {
               <span className="text-2xl font-black tracking-wide text-[#205a99] uppercase hidden sm:inline">
                 Technologies
               </span>
-            </Link>
+            </button>
           </div>
 
           {/* Center: Desktop Navigation Links */}
@@ -191,33 +225,62 @@ export default function Navbar() {
               {showSearchDropdown && searchResults.length > 0 && (
                 <div ref={searchDropdownRef} className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                   <div className="max-h-80 overflow-y-auto divide-y divide-gray-100">
-                    {searchResults.map((result) => (
-                      <button
-                        key={result.id}
-                        onClick={() => handleResultClick(result.href)}
-                        className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors group flex items-center justify-between"
-                      >
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-900 group-hover:text-blue-600 truncate">
-                            {result.label}
-                          </p>
-                          {result.category && (
-                            <p className="text-xs text-gray-500 truncate">
-                              {result.category}
+                    {searchResults.map((result) => {
+                      // Determine badge styling based on result type
+                      const getTypeBadgeStyles = () => {
+                        switch(result.type) {
+                          case 'product':
+                            return 'bg-blue-100 text-blue-700';
+                          case 'domain':
+                            return 'bg-purple-100 text-purple-700';
+                          case 'application':
+                            return 'bg-green-100 text-green-700';
+                          case 'service':
+                            return 'bg-orange-100 text-orange-700';
+                          case 'page':
+                          default:
+                            return 'bg-gray-100 text-gray-700';
+                        }
+                      };
+
+                      const getTypeLabel = () => {
+                        switch(result.type) {
+                          case 'product':
+                            return 'Product';
+                          case 'domain':
+                            return 'Domain';
+                          case 'application':
+                            return 'Use Case';
+                          case 'service':
+                            return 'Service';
+                          case 'page':
+                          default:
+                            return 'Page';
+                        }
+                      };
+
+                      return (
+                        <button
+                          key={result.id}
+                          onClick={() => handleResultClick(result.href)}
+                          className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors group flex items-center justify-between"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-gray-900 group-hover:text-blue-600 truncate">
+                              {result.label}
                             </p>
-                          )}
-                        </div>
-                        <span className={`text-xs px-2 py-1 rounded font-medium ml-2 flex-shrink-0 ${
-                          result.type === 'product' ? 'bg-blue-100 text-blue-700' :
-                          result.type === 'domain' ? 'bg-purple-100 text-purple-700' :
-                          'bg-gray-100 text-gray-700'
-                        }`}>
-                          {result.type === 'product' ? 'Product' :
-                           result.type === 'domain' ? 'Domain' :
-                           'Page'}
-                        </span>
-                      </button>
-                    ))}
+                            {result.category && (
+                              <p className="text-xs text-gray-500 truncate">
+                                {result.category}
+                              </p>
+                            )}
+                          </div>
+                          <span className={`text-xs px-2 py-1 rounded font-medium ml-2 flex-shrink-0 ${getTypeBadgeStyles()}`}>
+                            {getTypeLabel()}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
               )}
@@ -263,21 +326,61 @@ export default function Navbar() {
               {/* Mobile Search Results */}
               {showSearchDropdown && searchResults.length > 0 && (
                 <div className="mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-64 overflow-y-auto divide-y divide-gray-100">
-                  {searchResults.map((result) => (
-                    <button
-                      key={result.id}
-                      onClick={() => {
-                        handleResultClick(result.href);
-                        setMobileMenuOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors"
-                    >
-                      <p className="font-medium text-gray-900">{result.label}</p>
-                      {result.category && (
-                        <p className="text-xs text-gray-500">{result.category}</p>
-                      )}
-                    </button>
-                  ))}
+                  {searchResults.map((result) => {
+                    // Determine badge styling based on result type
+                    const getTypeBadgeStyles = () => {
+                      switch(result.type) {
+                        case 'product':
+                          return 'bg-blue-100 text-blue-700';
+                        case 'domain':
+                          return 'bg-purple-100 text-purple-700';
+                        case 'application':
+                          return 'bg-green-100 text-green-700';
+                        case 'service':
+                          return 'bg-orange-100 text-orange-700';
+                        case 'page':
+                        default:
+                          return 'bg-gray-100 text-gray-700';
+                      }
+                    };
+
+                    const getTypeLabel = () => {
+                      switch(result.type) {
+                        case 'product':
+                          return 'Product';
+                        case 'domain':
+                          return 'Domain';
+                        case 'application':
+                          return 'Use Case';
+                        case 'service':
+                          return 'Service';
+                        case 'page':
+                        default:
+                          return 'Page';
+                      }
+                    };
+
+                    return (
+                      <button
+                        key={result.id}
+                        onClick={() => {
+                          handleResultClick(result.href);
+                          setMobileMenuOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-3 hover:bg-blue-50 transition-colors flex items-center justify-between"
+                      >
+                        <div className="flex-1 min-w-0">
+                          <p className="font-medium text-gray-900">{result.label}</p>
+                          {result.category && (
+                            <p className="text-xs text-gray-500">{result.category}</p>
+                          )}
+                        </div>
+                        <span className={`text-xs px-2 py-1 rounded font-medium ml-2 flex-shrink-0 ${getTypeBadgeStyles()}`}>
+                          {getTypeLabel()}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>

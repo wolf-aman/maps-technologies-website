@@ -1,10 +1,23 @@
+/**
+ * Hero Section Component
+ * 
+ * Displays the main hero banner at the top of the homepage.
+ * Features a background image with overlay and company branding.
+ * 
+ * @component
+ * @example
+ * return <Hero />;
+ */
+
 import "@/styles/fonts.css";
 
-interface HeroProps {
-}
+/**
+ * Props for Hero component
+ * Currently accepts no props but structured for future expansion
+ */
+interface HeroProps {}
 
-export default function Hero({
-}: HeroProps) {
+export default function Hero({}: HeroProps) {
   return (
     <section className="bg-gray-50 pb-2">
 

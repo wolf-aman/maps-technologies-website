@@ -1,3 +1,21 @@
+/**
+ * Footer Component
+ * 
+ * Displays the application footer with:
+ * - Copyright information
+ * - Links to legal pages (Privacy Policy, Terms & Conditions)
+ * - Links to info pages (About Us, Careers)
+ * 
+ * Features:
+ * - Responsive design (mobile-friendly)
+ * - Hover effects on links
+ * - Auto-updating copyright year
+ * 
+ * @component
+ * @example
+ * return <Footer />;
+ */
+
 import Link from 'next/link';
 
 export default function Footer() {

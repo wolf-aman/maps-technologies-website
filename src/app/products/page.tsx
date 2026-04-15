@@ -6,8 +6,20 @@ import PDFViewer from '@/components/PDFViewer';
 import { productsTocStructure } from '@/config/products-toc.config';
 import type { TocItem } from '@/types/toc.types';
 
+// Helper function to find parent category
+function findParentCategory(slug: string): TocItem | null {
+  for (const category of productsTocStructure.items) {
+    if (category.children?.some(child => child.slug === slug)) {
+      return category;
+    }
+  }
+  return null;
+}
+
 export default function ProductsPage() {
   const [selectedItem, setSelectedItem] = useState<TocItem | null>(null);
+  const parentCategory = selectedItem && selectedItem.slug ? findParentCategory(selectedItem.slug) : null;
+  const categoryPath = parentCategory && parentCategory.slug ? `products/${parentCategory.slug}` : undefined;
 
   return (
     <div className="min-h-screen relative overflow-hidden">
@@ -58,7 +70,7 @@ export default function ProductsPage() {
           <main className="flex-1">
             {selectedItem?.slug && !selectedItem?.children ? (
               // Display PDF viewer for selected leaf item (product)
-              <PDFViewer slug={selectedItem.slug} label={selectedItem.label} />
+              <PDFViewer slug={selectedItem.slug} label={selectedItem.label} category={categoryPath} />
             ) : (
               // Display showcase image by default
               <div
