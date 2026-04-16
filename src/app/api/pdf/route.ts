@@ -1,23 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile } from 'fs/promises';
+import { stat, open } from 'fs/promises';
 import path from 'path';
 
 /**
  * GET /api/pdf?path=...
  * 
  * Serves PDF files with proper headers to force inline display instead of download.
- * This ensures consistent PDF viewing behavior across browsers and systems.
+ * This ensures consistent PDF viewing behavior across all browsers and systems.
  * 
  * Features:
  * - Sets Content-Disposition: inline to force browser display
  * - Proper Content-Type: application/pdf header
- * - Support for range requests (enables seeking/scrubbing in PDF viewer)
+ * - Full HTTP 206 Range Request support (critical for PDF seeking/scrubbing)
+ * - RFC 5987 compliant filename encoding in Content-Disposition
  * - Secure path validation to prevent directory traversal
+ * - Streaming for large files (memory efficient)
  * - Proper caching headers
+ * - Cross-browser compatibility (no X-Frame-Options to avoid iframe issues)
  * 
  * Query Parameters:
  * - path: The relative path to the PDF file from public directory
  *   Example: ?path=pdfs/products/analog/op-amp.pdf
+ * 
+ * Why Range Requests Matter:
+ * Most modern PDF viewers (including browser native and PDF.js) need HTTP 206
+ * range request support to efficiently load and seek through PDFs. Without it:
+ * - Some browsers try to download entire PDF instead of displaying inline
+ * - Seeking/scrubbing in PDF viewer fails
+ * - Memory usage increases dramatically for large PDFs
+ * - Mobile devices often fail to render PDFs
  */
 export async function GET(request: NextRequest) {
   try {
@@ -59,27 +70,78 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    // Read the PDF file
-    const fileBuffer = await readFile(fullPath);
+    // Get file stats for size and range request handling
+    const fileStats = await stat(fullPath);
+    const fileSize = fileStats.size;
+    const fileName = path.basename(pdfPath);
 
-    // Create response with proper headers
-    const response = new NextResponse(fileBuffer, {
+    // RFC 5987 compliant filename encoding for Content-Disposition
+    // Handles special characters properly across all browsers
+    const encodedFileName = encodeURIComponent(fileName).replace(/[!'()*]/g, c => `%${c.charCodeAt(0).toString(16).toUpperCase()}`);
+
+    // Parse Range header if present (HTTP 206 Partial Content)
+    const rangeHeader = request.headers.get('range');
+    
+    if (rangeHeader) {
+      // Parse range header: "bytes=start-end"
+      const rangeMatch = rangeHeader.match(/bytes=(\d+)-(\d*)/);
+      
+      if (rangeMatch) {
+        const start = parseInt(rangeMatch[1], 10);
+        const end = rangeMatch[2] ? parseInt(rangeMatch[2], 10) : fileSize - 1;
+
+        // Validate range
+        if (start < 0 || end >= fileSize || start > end) {
+          return new NextResponse(null, {
+            status: 416,
+            headers: {
+              'Content-Range': `bytes */${fileSize}`,
+            },
+          });
+        }
+
+        // Stream the range
+        const fileHandle = await open(fullPath);
+        const stream = fileHandle.createReadStream({ start, end });
+
+        return new NextResponse(stream as any, {
+          status: 206,
+          headers: {
+            'Content-Type': 'application/pdf',
+            'Content-Length': (end - start + 1).toString(),
+            'Content-Range': `bytes ${start}-${end}/${fileSize}`,
+            'Accept-Ranges': 'bytes',
+            'Cache-Control': 'public, max-age=31536000, immutable',
+            'X-Content-Type-Options': 'nosniff',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+            'Access-Control-Allow-Headers': 'Content-Type, Range',
+            // Use filename* for RFC 5987 encoding
+            'Content-Disposition': `inline; filename="${fileName}"; filename*=UTF-8''${encodedFileName}`,
+          },
+        });
+      }
+    }
+
+    // No range request - send full file
+    const fileHandle = await open(fullPath);
+    const stream = fileHandle.createReadStream();
+
+    const response = new NextResponse(stream as any, {
       status: 200,
       headers: {
-        // Force inline display instead of download
-        'Content-Disposition': 'inline; filename="' + path.basename(pdfPath) + '"',
         'Content-Type': 'application/pdf',
-        'Content-Length': fileBuffer.length.toString(),
-        
-        // Support for range requests (allows PDF viewers to seek/scrub)
+        'Content-Length': fileSize.toString(),
         'Accept-Ranges': 'bytes',
-        
-        // Cache control - cache PDFs for 1 year (they're static assets)
+        // Use filename* for RFC 5987 encoding
+        'Content-Disposition': `inline; filename="${fileName}"; filename*=UTF-8''${encodedFileName}`,
         'Cache-Control': 'public, max-age=31536000, immutable',
-        
-        // Security headers
         'X-Content-Type-Options': 'nosniff',
-        'X-Frame-Options': 'SAMEORIGIN',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Range',
+        // Removed X-Frame-Options from API response - should only be on pages
+        // This prevents iframe loading issues in some browsers
       },
     });
 

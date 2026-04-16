@@ -10,7 +10,7 @@ export const productsTocStructure: TocStructure = {
   title: 'Products',
   description: [
     'A modular Hardware platform built on a Arm® Cortex®-M4 microcontroller, unifying sensing, connectivity, and power into one scalable system.',
-    'Mechanically and Electrically compatible with Raspberry Pi and HATs for flexible integration and expansion.',
+    'Mechanically and Electrically compatible with Raspberry Pi HATs for flexible integration and expansion.',
   ],
   items: [
     {
@@ -57,7 +57,7 @@ export const productsTocStructure: TocStructure = {
     {
       id: 'micro-controller-category',
       label: 'Microcontroller',
-      slug: 'micro-controller',
+      slug: 'microcontroller',
       children: [
         {
           id: 'DAQ Processing Engine Board',
