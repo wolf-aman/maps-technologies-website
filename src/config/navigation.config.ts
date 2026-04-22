@@ -44,6 +44,44 @@ export const navigationConfig: NavigationConfig = {
       href: '#useful-links',
       type: 'hash',
       description: 'Quick access to useful resources',
+      children: [
+        {
+          label: 'Stack Overflow',
+          href: 'https://www.stackoverflow.com',
+          type: 'external',
+          description: 'Q&A for developers',
+        },
+        {
+          label: 'Beningo',
+          href: 'https://www.beningo.com',
+          type: 'external',
+          description: 'Embedded systems resources',
+        },
+        {
+          label: 'Embedded.com',
+          href: 'https://www.embedded.com',
+          type: 'external',
+          description: 'Embedded systems news and articles',
+        },
+        {
+          label: 'Controllers Tech',
+          href: 'https://controllerstech.com',
+          type: 'external',
+          description: 'Microcontroller tutorials',
+        },
+        {
+          label: 'Voltage Divider Calculator',
+          href: 'https://ohmslawcalculator.com/voltage-divider-calculator',
+          type: 'external',
+          description: 'Online voltage divider calculator',
+        },
+        {
+          label: 'Asserts in Embedded Systems',
+          href: 'https://interrupt.memfault.com/blog/asserts-in-embedded-systems',
+          type: 'external',
+          description: 'Best practices for asserts',
+        },
+      ],
     },
     {
       label: 'Contact Us',

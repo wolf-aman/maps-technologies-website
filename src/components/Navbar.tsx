@@ -32,7 +32,10 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchItem[]>([]);
   const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null);
   const searchDropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const navItems = navigationConfig.items;
 
@@ -136,15 +139,18 @@ export default function Navbar() {
       if (searchDropdownRef.current && !searchDropdownRef.current.contains(event.target as Node)) {
         setShowSearchDropdown(false);
       }
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
     };
 
-    if (!showSearchDropdown) {
+    if (!showSearchDropdown && !openDropdown) {
       return;
     }
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showSearchDropdown]);
+  }, [showSearchDropdown, openDropdown]);
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
@@ -189,17 +195,60 @@ export default function Navbar() {
           {/* Center: Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item, index) => {
-              // Render regular link
+              const hasChildren = item.children && item.children.length > 0;
+              const isOpen = openDropdown === `${item.href}-${index}`;
+              
+              if (!hasChildren) {
+                // Render regular link
+                return (
+                  <NavLink
+                    key={`${item.href}-${index}`}
+                    item={item}
+                    className={`text-sm font-medium ${
+                      item.href === '/' 
+                        ? 'text-gray-900 hover:text-blue-600' 
+                        : 'text-gray-600 hover:text-blue-600'
+                    } transition-colors`}
+                  />
+                );
+              }
+              
+              // Render dropdown
               return (
-                <NavLink
-                  key={`${item.href}-${index}`}
-                  item={item}
-                  className={`text-sm font-medium ${
-                    item.href === '/' 
-                      ? 'text-gray-900 hover:text-blue-600' 
-                      : 'text-gray-600 hover:text-blue-600'
-                  } transition-colors`}
-                />
+                <div key={`${item.href}-${index}`} className="relative group">
+                  <button
+                    onClick={() => setOpenDropdown(isOpen ? null : `${item.href}-${index}`)}
+                    className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors flex items-center gap-1"
+                  >
+                    {item.label}
+                    <svg 
+                      className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </button>
+                  
+                  {isOpen && (
+                    <div 
+                      ref={dropdownRef}
+                      className="absolute left-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-40"
+                    >
+                      <div className="divide-y divide-gray-100">
+                        {item.children!.map((child, childIndex) => (
+                          <NavLink
+                            key={`${child.href}-${childIndex}`}
+                            item={child}
+                            className="text-sm text-gray-600 hover:text-blue-600 transition-colors px-4 py-3 hover:bg-blue-50 block w-full text-left"
+                            onClick={() => setOpenDropdown(null)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               );
             })}
           </div>
@@ -387,14 +436,57 @@ export default function Navbar() {
 
             {/* Mobile Navigation Links */}
             <div className="flex flex-col space-y-2 px-4">
-              {navItems.map((item, index) => (
-                <NavLink
-                  key={`mobile-${item.href}-${index}`}
-                  item={item}
-                  className="text-base font-medium text-gray-600 hover:text-blue-600 transition-colors px-2 py-2 rounded-lg hover:bg-gray-50"
-                  onClick={() => setMobileMenuOpen(false)}
-                />
-              ))}
+              {navItems.map((item, index) => {
+                const hasChildren = item.children && item.children.length > 0;
+                const dropdownKey = `mobile-${item.href}-${index}`;
+                const isMobileDropdownOpen = mobileDropdownOpen === dropdownKey;
+                
+                if (!hasChildren) {
+                  return (
+                    <NavLink
+                      key={`mobile-${item.href}-${index}`}
+                      item={item}
+                      className="text-base font-medium text-gray-600 hover:text-blue-600 transition-colors px-2 py-2 rounded-lg hover:bg-gray-50"
+                      onClick={() => setMobileMenuOpen(false)}
+                    />
+                  );
+                }
+                
+                return (
+                  <div key={`mobile-${item.href}-${index}`}>
+                    <button
+                      onClick={() => setMobileDropdownOpen(isMobileDropdownOpen ? null : dropdownKey)}
+                      className="w-full text-left text-base font-medium text-gray-600 hover:text-blue-600 transition-colors px-2 py-2 rounded-lg hover:bg-gray-50 flex items-center justify-between"
+                    >
+                      {item.label}
+                      <svg 
+                        className={`w-4 h-4 transition-transform ${isMobileDropdownOpen ? 'rotate-180' : ''}`}
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                      </svg>
+                    </button>
+                    
+                    {isMobileDropdownOpen && (
+                      <div className="pl-4 space-y-1 mt-1">
+                        {item.children!.map((child, childIndex) => (
+                          <NavLink
+                            key={`mobile-child-${child.href}-${childIndex}`}
+                            item={child}
+                            className="text-sm text-gray-600 hover:text-blue-600 transition-colors px-2 py-2 rounded-lg hover:bg-gray-50 block"
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setMobileDropdownOpen(null);
+                            }}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

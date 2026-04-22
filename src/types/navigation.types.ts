@@ -26,6 +26,8 @@ export interface NavigationItem {
   icon?: string;
   /** Optional description for accessibility */
   description?: string;
+  /** Optional sub-items for dropdown menus */
+  children?: NavigationItem[];
 }
 
 /**
